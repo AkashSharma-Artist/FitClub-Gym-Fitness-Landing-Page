@@ -1,0 +1,731 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* This imports the Poppins font from Google Fonts.
+The wght@400;500;600;700 part means it imports font weights 400 (Regular), 500 (Medium), 600 (Semi-Bold), and 700 (Bold).
+This ensures your website uses a modern, clean-looking font. */
+
+:root {  /*:root is the highest-level CSS selector (similar to html) where you define CSS variables (--variable-name).
+    
+    Instead of using hardcoded colors everywhere, we define them once and reuse them.*/
+  --primary-color: #111317;  /*Primary part is for main background color*/
+  --primary-color-light: #1f2125;
+  --primary-color-extra-light: #35373b;
+  --secondary-color: #f9ac54;/*Secondary part is used for highlighting*/
+  --secondary-color-dark: #d79447;
+  --text-light: #d1d5db; /*iss nam se ek bana krr rkhee hai jo agee use krenge*/
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+* {
+  padding: 0;  /*sabko select krr default hatayega*/
+  margin: 0;
+  box-sizing: border-box; /*box ke andrr rhee sab kuch bhar na nikle or  ensures that padding and borders don’t
+   increase an element’s width/height (makes layout easier to manage).*/
+}
+
+.section__container {
+  max-width: var(--max-width); /*ensures sections don’t exceed 1200px in width.*/
+  margin: auto; /*centers the section horizontally.*/
+  padding: 5rem 1rem; /* adds vertical spacing (5rem) and small horizontal padding (1rem).*/
+
+  /*Vertical spacing, also known as leading in print design, is the vertical distance 
+  between lines of text or the space between rows of elements. */
+
+  /*Horizontal spacing is the distance between elements arranged side-by-side, 
+  such as columns of text or items within a layout. */
+}
+
+.section__header {
+  margin-bottom: 1rem; /* separates the header from the content below.*/
+  font-size: 2.25rem; /*makes the header big.*/
+  font-weight: 600;  /*semi bold*/
+  text-align: center;
+  color: var(--white); 
+} /*yeh jo pura bata rha hai yeh ki jo headers ka jo topic hai vo*/
+
+.section__subheader {
+  max-width: 600px; /*ensures the text doesn’t stretch too wide.*/
+  margin: auto;  /*centers it horizontally.*/
+  text-align: center; /*makes sure the text is aligned in the middle.*/
+  color: var(--text-light);
+}
+
+.btn {
+  padding: 1rem 2rem; /*makes the button bigger.*/
+  outline: none; /*removes the default outline when clicking the button.*/
+  border: none;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s; /*hover pe color ke badlne ka time*/
+}
+
+.btn:hover {
+  background-color: var(--secondary-color-dark);
+}
+
+img {
+  width: 100%; /*makes images responsive (scale to their container).*/
+  display: flex;
+}
+
+a {
+  text-decoration: none; /*removes the underline from links.*/
+}
+
+.bg__blur {
+  position: absolute;
+  box-shadow: 0 0 1000px 50px var(--secondary-color);
+  z-index: -1;
+
+  /* Adds a glowing blurred effect in the background using box-shadow.
+position: absolute; keeps it freely placed without affecting layout.
+z-index: -1; ensures it stays behind content. */
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--primary-color);
+  }   /*back ground me color diya hai*/
+  
+  nav {
+    max-width: var(--max-width); /* limits nav width to 1200px.*/
+    margin: auto; /*center me rkhega*/
+    padding: 2rem 1rem; /*adds vertical and horizontal spacing.*/
+    display: flex;  /* makes the navbar flexible (horizontal layout). means side by side*/
+    align-items: center; /*vertically centers items.*/
+    justify-content: space-between; /*spreads items across the navbar.*/
+    gap: 2rem; /*adds spacing between navbar elements*/
+  }
+  
+  .nav__logo {
+    max-width: 150px; /*Limits the logo’s width to 150px.*/
+  }
+  
+  .nav__links {
+    list-style: none; /*removes bullet points from the list.*/
+    display: flex; /*side by side lane ke liye*/
+    align-items: center; /*vertically centers items.*/
+    gap: 3rem; /*sapce links ke bich*/
+  }
+  
+  .link a {
+    position: relative; /*allows positioning of the underline effect. jo animation hum dalenge*/
+    padding-bottom: 0.75rem; /*niche halka sa padding*/
+    color: var(--white); /*link ke nam ka color*/
+  }
+  
+  .link a::after {
+    content: ""; /*This is required for ::after pseudo-elements.
+    It generates an empty element after the <a> element.
+    Used to create a custom underline effect.*/
+    position: absolute; /*Positions the underline independently of normal text flow.
+    The closest relative ancestor (usually the <a> itself) serves as its reference point.*/
+    height: 2px; /*underline ka height*/
+    width: 0; /*starting me line ka width 0 hai*/
+    left: 0; /*left se start hoga isliye left 0*/
+    bottom: 0; /*niche rhega isliye bottom 0*/
+    background-color: var(--secondary-color);
+    transition: 0.3s;
+  }
+  
+  .link a:hover::after {
+    width: 50%; /*hover ke badd width badha krr 50 hua*/
+  }
+
+
+  .header__container {
+    position: relative; /*Any child element inside .header__container with position: absolute; 
+    (like .header__container::before) will be positioned relative to .header__container, instead of the whole page.
+    means iske andr ki chezz iske related hi rhenge andrr*/
+    padding-top: 2rem;
+    display: grid; /*grid me dega aju baju do div ka like img or heads ka*/
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2rem; /*gap dono grid ke bich ka*/
+  }
+
+  /* The .header__container ensures a structured two-column layout where the text and image are aligned properly. */
+  /*The ::before pseudo-element adds a stylized background text effect, making "FITNESS" appear as a faint watermark in the background.*/
+  /*The grid layout ensures responsiveness, making the text and image evenly spaced and centered.*/
+  /*The ::before pseudo-element is used to insert content before an element’s actual content. It is commonly used for decorative elements,
+   icons, backgrounds, or additional styling without adding extra HTML elements. whitch keep html clean and also easy to style*/
+
+   .header__container::before {
+    content: "FITNESS";  /* Inserts the text "FITNESS" */
+    position: absolute;  /* Positions it absolutely relative to .header__container */
+    bottom: 5rem;  /* Places it 5rem from the bottom */
+    right: 20rem;  /* Places it 20rem from the right */
+    font-size: 10rem;  /* Makes the text large */
+    font-weight: 700;  /* Bold text */
+    line-height: 7rem;  /* Adjusts spacing between lines */
+    color: var(--white);  /* White color */
+    opacity: 0.05;  /* Makes it almost transparent */
+    z-index: -1;  /* Places it behind other elements */
+}
+
+  .header__blur {
+    bottom: 5rem;
+    right: 0; /*Positions this blur toward the bottom-right corner. means yeh uss blr ko postion kiya hai, jo chamkdar vala hai */
+  }
+  
+  .header__content h4 {
+    margin-bottom: 1rem; /*adds spacing below.*/
+    font-size: 1rem;
+    font-weight: 600;  /* makes it semi-bold.*/
+    color: var(--secondary-color);
+  }
+  
+  .header__content h1 {
+    margin-bottom: 1rem;
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 6rem; /*ensures proper spacing between lines.*/
+    color: var(--white);
+  }
+
+  /*This makes the word "MAKE" appear as an outline (hollow text) instead of filled color.*/
+  
+  .header__content h1 span {
+    -webkit-text-fill-color: transparent; /* Makes text see-through.*/
+    -webkit-text-stroke: 1px var(--white); /*Adds a white border around the letters.*/
+  }
+  
+  .header__content p {
+    margin-bottom: 2rem;
+    color: var(--text-light);
+  }
+  
+  .header__image {
+    position: relative; /*position: relative; allows absolute elements inside it to be placed freely.*/
+  }
+  
+  .header__image::before {
+    content: "o";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /*top , left or yeh pura usko Centers it horizontally.*/
+    font-size: 40rem;
+    font-weight: 400;
+    line-height: 20rem;
+    color: var(--secondary-color);
+    opacity: 0.1;
+    z-index: -1;
+  }
+  
+  .header__image img {
+    max-width: 350px;
+    margin: auto; /*Centers it inside .header__image.*/
+  } 
+
+  /*explore part hai yeh yha se*/
+
+  .explore__header {
+    display: flex; /*Aligns the title and navigation elements in a row.*/
+    align-items: center; /*Centers items vertically.*/
+    justify-content: space-between; /* Pushes the heading to the left and the navigation arrows to the right.*/
+    gap: 2rem; /*Adds spacing between elements.*/
+  }
+  
+  .explore__nav {
+    display: flex; /*do icon ko ajju bajuu dega*/
+    align-items: center;
+    gap: 2rem; /*gap dega*/
+  }
+  
+  .explore__nav span {
+    padding: 0 6px; /*Adds horizontal spacing.*/
+    font-size: 1.5rem; /*font size*/
+    color: var(--white);
+    border: 2px solid var(--white);
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .explore__nav span:hover {
+    color: var(--secondary-color); /*color badlega hover prr*/
+    border-color: var(--secondary-color);
+  }
+  
+  .explore__grid {
+    margin-top: 4rem; /*upper space diye hai taki chipke na*/
+    display: grid; /*Gridyani frames me dega*/
+    grid-template-columns: repeat(4, 1fr); /* Creates 4 equal columns for the 4 cards.*/
+    gap: 2rem; 
+  }
+  
+  .explore__card {
+    padding: 1rem;  /*Adds inner spacing.*/
+    background-color: var(--primary-color-light);
+    border: 2px solid transparent; /*border diya hai*/
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  
+  .explore__card:hover {
+    background-color: var(--primary-color-extra-light);
+    border-color: var(--secondary-color); /*after hover changes ayega*/
+  }
+  
+  .explore__card span {
+    display: inline-block; /* Allows width and height adjustments. Using display: inline-block;
+     ensures that the <span> behaves like a small box while still staying in line with other elements. 
+     If you don't use it, padding and background styling won't work properly.*/
+    padding: 2px 9px;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    color: var(--white);
+    background-color: var(--secondary-color-dark);
+    border-radius: 5px;
+  }
+  
+  .explore__card h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);  /*easy to understand*/
+  }
+  
+  .explore__card p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+  }
+  
+  .explore__card a {
+    color: var(--white);
+    transition: 0.3s;
+  }
+  
+  .explore__card a:hover {
+    color: var(--secondary-color);
+  }  
+
+  /*above all were easy to understand*/
+
+
+  .class__container {
+    display: grid; /*Uses CSS Grid for layout.*/
+    grid-template-columns: repeat(2, 1fr); /*→ Divides the section into two equal columns:
+
+    Left column → .class__image (Images)
+    
+    Right column → .class__content (Text & Button)*/
+
+    gap: 2rem; /*dono ke bich me gap*/
+  }
+  
+  .class__image {
+    position: relative;  /*Allows child elements (.class__img-1 & .class__img-2) to be positioned absolutely inside this container.
+
+    This means the images can be placed freely inside the .class__image container without affecting other elements.*/
+  }
+  
+  .class__image .class__img-1 {
+    position: absolute; /* Moves this image independent of normal document flow.*/
+    right: 0;
+    top: 0; /* Positions the image at the top-right corner of .class__image.*/
+    max-width: 500px; /*Limits the image's width to 500px for responsive behavior.*/
+    border-radius: 10px;
+  }
+
+  /*This image stays fixed in the top-right of the image container. upper vale ka hai*/
+  
+  .class__image .class__img-2 {
+    position: absolute;
+    left: 0;
+    bottom: 0; /*Positions the image at the bottom-left corner of .class__image.*/
+    max-width: 300px;
+    border-radius: 10px;
+  }
+
+  /*This image stays fixed in the bottom-left of the image container. upper vala now*/
+  
+  .class__content {
+    padding: 2rem 0; /*Adds vertical padding (top & bottom) to separate text from other elements.*/
+  }
+  
+  .class__content .section__header {
+    text-align: left;
+    max-width: 400px;
+  }
+  
+  .class__content p {
+    margin-bottom: 4rem;
+    color: var(--text-light);
+  }
+
+  /*now above ke sare same to understand*/
+
+  /*now JOIN SECTION*/
+
+  .join__image {
+    margin-top: 4rem; /*upper margin diye hai for spacing*/
+    position: relative; /* Makes this container a reference point for absolutely positioned child elements inside it.*/
+  }
+  
+  .join__image img {
+    border-radius: 10px;
+  }
+  
+  .join__grid {
+    position: absolute;
+    bottom: -5rem; /* Moves the grid 5rem below its parent element (.join__image), creating an overlapping effect.
+    or -5 means thoda niche jayega jitna - badhayenge utna niche jayega na ki upper */
+    width: calc(100% - 4rem);/* Ensures the grid is slightly smaller than its container by subtracting 4rem.*/
+    padding: 2rem;
+    margin: 0 2rem;
+    display: flex; /*side by side ke liye*/
+    flex-wrap: wrap; /* Ensures cards wrap onto a new line if needed (responsive behavior).*/
+    gap: 2rem; /*Creates spacing between the cards.*/
+    background-color: var(--primary-color-light);
+    border-radius: 10px;
+  }
+  
+  .join__card {
+    flex: 1 1 250px; /* Ensures each card grows/shrinks flexibly but has a minimum width of 250px.*/
+    display: flex; /*andr ke content ko side by side layega yani ek side span or ek side div ka jisme title or sub head hai*/
+    align-items: center; /*center or niche vale me gap 1rem ka*/
+    gap: 1rem;
+  }
+  
+  .join__card span {
+    padding: 5px 12px;
+    font-size: 1.75rem;
+    color: var(--white);
+    background-color: var(--secondary-color-dark);
+    border-radius: 5px;
+  } /*easy to know*/
+  
+  .join__card h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  
+  .join__card p {
+    color: var(--text-light);
+  }
+
+  /*upper ke do easy hai smjhne ke liye*/
+
+
+  /*PRICE BUTTON*/
+  
+  .price__grid {
+    margin-top: 4rem; /*top ka margin*/
+    display: grid; /*Sets the container to use the CSS Grid layout.*/
+    grid-template-columns: repeat(3, 1fr); /* Defines 3 equal columns in the grid.*/
+    gap: 2rem; /*Adds a 2rem gap between grid items.*/
+  }
+  
+  .price__card {
+    padding: 3rem 2rem; /*Adds 3rem of padding on the top and bottom, and 2rem on the left and right.*/
+    display: flex;
+    flex-direction: column; /*ajuu baju rkhega columns ko*/
+    background-color: var(--primary-color-light);
+    border: 2px solid transparent; /*Adds a transparent border hover se pehle ka*/
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  
+  .price__card:hover {
+    background-color: var(--primary-color-extra-light);
+    border-color: var(--secondary-color);
+  }
+  
+  .price__card__content {
+    flex: 1; /*means bara barr niche ka distance rhe button or content ka vrna upper ayega button kam content hoga toh*/
+    margin-bottom: 2rem;
+  }
+  
+  .price__card h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  
+  .price__card h3 {
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--white);
+    border-bottom: 2px solid var(--white);
+  }
+  
+  .price__card p {
+    margin-bottom: 0.75rem;
+    color: var(--white);
+  }
+  
+  .price__card p i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+  }
+  
+  .price__btn {
+    color: var(--secondary-color);
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+  }
+  
+  .price__btn:hover {
+    color: var(--white);
+    background-color: var(--secondary-color);
+  }
+
+  /*upper ke iske asan hai*/
+
+
+  /*REVIEW*/
+
+  .review {
+    background-color: var(--primary-color-light); /*ek color diye hai*/
+  }
+  
+  .review__container {
+    display: flex; /*side by side ek div or ek span hai, Uses flexbox to arrange elements in a row.*/
+    gap: 2rem;
+  }
+  
+  .review__container > span {
+    font-size: 6rem; /*Makes the quote icon very large.*/
+    color: var(--secondary-color);
+    opacity: 0.5; /* Makes the icon semi-transparent.*/
+  }
+  
+  .review__content {
+    flex: 1; /* Makes the content area take up the remaining space inside the .review__container.*/
+  }
+  
+  .review__content h4 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+  
+  .review__content p {
+    max-width: 800px;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+  }
+  
+  .review__rating span {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+  }  
+
+  /*yha tkk easy to understand the codes*/
+  
+  .review__footer {
+    margin-top: 4rem; 
+    display: flex; /*side by side name vala or arrows vala*/
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .review__member {
+    display: flex; /*img or words side by side*/
+    align-items: flex-start; /* Aligns items to the top.*/
+    gap: 1rem;
+  }
+  
+  .review__member img {
+    max-width: 60px;
+    border-radius: 100%;
+  }
+  
+  .review__member__details h4 {
+    margin-bottom: 0; /*Removes extra spacing below the reviewer's name.*/
+  }
+  
+  .review__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .review__nav span {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+  }
+
+  /*easy to understand the rest parts*/
+
+
+  .footer__container {
+    position: relative; /*Sets the position of the footer relative to its normal layout.*/
+    display: grid; /*Uses CSS Grid to layout elements inside the footer.*/
+    grid-template-columns: 400px repeat(3, 1fr);/*Defines the column structure:
+
+    First column (for the logo and description) is 400px wide.
+    
+    The remaining three columns (Company, About Us, Contact) take equal space (1fr each).*/
+    gap: 2rem;
+  }
+  
+  .footer__blur {
+    bottom: 0;
+    right: 0; /*Positions a blurred effect (.bg__blur) in the footer section at the bottom-right corner.*/
+  }
+  
+  .footer__logo {
+    max-width: 150px;
+    margin-bottom: 2rem;
+  }
+  
+  .footer__col p {
+    margin-bottom: 2rem;
+    color: var(--text-light);
+  }
+  
+  .footer__socials {
+    display: flex; /* Arranges social media icons in a horizontal row.*/
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .footer__socials a {
+    padding: 5px 10px; /*Adds padding inside each social media icon.*/
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 100%;
+    transition: 0.3s;
+  }
+  
+  .footer__socials a:hover {
+    color: var(--white);
+    background-color: var(--secondary-color);
+  }
+  
+  .footer__col h4 {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+  
+  .footer__col > a {
+    display: block; /*Makes links appear as separate blocks (instead of inline). vrna side me ajayenge jitne space me hai
+     baki uske niche*/
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    transition: 0.3s;
+  }
+  
+  .footer__col > a:hover {
+    color: var(--secondary-color);
+  }
+  
+  .footer__bar {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: var(--white);
+  }
+
+  /*all easy to understand*/
+
+   /*This block applies styles when the screen width is below 900px, optimizing for tablets and small laptops.*/
+
+  @media (width < 900px) {
+    .nav__links {
+      display: none; /*Hides the navigation menu, likely replaced by a hamburger menu for mobile users.*/
+    }
+  
+    .header__container {
+      grid-template-columns: repeat(1, 1fr); /*Changes the header layout from multiple columns to a single column, 
+      stacking content vertically. jiske krnn img or content word ka ek ke niche ek ajayee*/
+    }
+  
+    .header__image {
+      grid-area: 1/1/2/2; /*Ensures the header image stays in a specific area in the grid for better alignment.*/
+    }
+  
+    .explore__grid {
+      grid-template-columns: repeat(2, 1fr); /*jab tab me ho toh 4 ke badle aju abaju 2 me ho*/
+      gap: 1rem;
+    }
+  
+    .class__container {
+      grid-template-columns: repeat(1, 1fr); /*jo img or content hai usko ek ke niche ek kiye  hai*/
+    }
+  
+    .class__image {
+      min-height: 500px; /*Ensures images remain large enough for visibility.*/
+    }
+  
+    .price__grid {
+      grid-template-columns: repeat(2, 1fr); /*isko do me kiya gya hai*/
+    }
+  
+    .review__container {
+      gap: 2rem;
+    }
+  
+    .footer__container {
+      grid-template-columns: 1fr 200px; /*Resizes the footer layout to have:
+
+      1 flexible column (1fr)
+      
+      A fixed-width column (200px)*/
+    }
+  }
+  
+/*This block applies styles when the screen width is below 600px, optimizing for mobile devices.*/
+
+  @media (width < 600px) {
+    .explore__header {
+      flex-direction: column; /*Ensures elements inside .explore__header stack on top of each other.*/
+    }
+  
+    .explore__grid {
+      grid-template-columns: repeat(1, 1fr); /*Adjusts the grid layout from 2 columns (previous breakpoint) to 1 column.*/
+    }
+  
+    .join__container {
+      margin-bottom: 15rem; /*Adds a large bottom margin for better spacing.*/
+    }
+  
+    .join__grid {
+      width: 100%;
+      margin: 0;
+      bottom: -20rem; /*Makes .join__grid full width.
+
+      Moves it 20rem down for positioning.*/
+    }
+  
+    .price__grid {
+      grid-template-columns: repeat(1, 1fr); /*1 frame me */
+    }
+  
+    .review__container {
+      flex-direction: column;
+      gap: 0; /*Removes extra spacing.*/
+    }
+  
+    .review__footer {
+      flex-direction: column;
+    }
+  
+    .footer__container {
+      grid-template-columns: 1fr 150px; /*Reduces footer column width (from 200px to 150px) to fit better on small screens.*/
+    }
+  
+    .footer__bar {
+      text-align: center;
+    }
+  }
